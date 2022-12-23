@@ -5,6 +5,7 @@ import public_transport.PublicTransport;
 public class Texi extends PublicTransport {
     final int maxPassenger = 4;
     public int maxPassengerCoppy = maxPassenger;
+    public int passenger;
     public Texi() {
         super(3000);
     }
@@ -16,15 +17,17 @@ public class Texi extends PublicTransport {
 
     @Override
     public void correntPassenger(int passenger) {
-        if(maxPassenger - passenger>=0){
-            System.out.println("탑승 승객 수: " + passenger + "\n" + "잔여 승객 수: "+ (maxPassenger - passenger));
+        this.passenger += passenger;
+        if(maxPassenger - this.passenger>=0){
+            System.out.println("탑승 승객 수: " + passenger + "\n" + "잔여 승객 수: "+ (maxPassenger - this.passenger));
         }else{
             System.out.println("최대 승객 수 초과");
+            this.passenger -= passenger;
         }
     }
 
     @Override
-    public void setCharge() {
+    public void setCharge(int passenger) {
         System.out.println("기본 요금 확인: " + charge);
     }
 

@@ -7,10 +7,10 @@ public class Main_Texi {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String inPutData;
-        int passenger = 0;
         int distance = 0;
         int addCharge = 0;
-        int fuel = 0;
+        int fuel = 100;
+        int sumTotalCharge = 0;
         PublicTransport texi1 = new Texi();
         PublicTransport texi2 = new Texi();
         texi1.create(1);
@@ -22,12 +22,9 @@ public class Main_Texi {
                 if(fuel>=10){
                     System.out.println("몇명을 태울까요?");
                     inPutData = scanner.nextLine();
-                    passenger += Integer.parseInt(inPutData);
-                    texi1.correntPassenger(passenger);
-                    if(((Texi) texi1).maxPassengerCoppy<passenger){
-                        passenger -= Integer.parseInt(inPutData);
-                    }else{
-                        texi1.setCharge();
+                    if(((Texi) texi1).maxPassengerCoppy-Integer.parseInt(inPutData)>0){
+                        texi1.correntPassenger(Integer.parseInt(inPutData));
+                        texi1.setCharge(1);
                         System.out.println("목적지를 입력하세요");
                         inPutData = scanner.nextLine();
                         System.out.println("목적지: " + inPutData);
@@ -35,15 +32,16 @@ public class Main_Texi {
                         inPutData = scanner.nextLine();
                         System.out.println("목적지까지 거리: " + inPutData + "km");
                         distance = Integer.parseInt(inPutData);
+                        addCharge = ((Texi) texi1).addCharge(distance);
+                    }else{
+                        System.out.println("최대 승객 수 초과");
                     }
                 }else{
                     System.out.println("운행불가");
                     texi1.setFuel(fuel);
                 }
-
             }
             if(inPutData.equals("b")){
-                addCharge = ((Texi) texi1).addCharge(distance);
                 System.out.println("추가요금: " + addCharge);
             }
             if(inPutData.equals("c")){
@@ -56,10 +54,12 @@ public class Main_Texi {
                 System.out.println("손님이 내립니다.");
                 int totalCharge = addCharge + texi1.charge;
                 System.out.println("지불할 요금: " + totalCharge);
-                passenger = 0;
+                ((Texi) texi1).passenger = 0;
+                sumTotalCharge +=totalCharge;
+                System.out.println("누적 요금: " + sumTotalCharge);
             }
             if(inPutData.equals("e")){
-                texi1.situation(passenger, fuel);
+                texi1.situation(((Texi) texi1).passenger, fuel);
             }
             if(inPutData.equals("q")){
                 break;

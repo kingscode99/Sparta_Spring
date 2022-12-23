@@ -9,7 +9,7 @@ public abstract class PublicTransport{
 
     public abstract void create(int num);
     public abstract void correntPassenger(int passenger);
-    public abstract void setCharge();
+    public abstract void setCharge(int passenger);
     public abstract void situation(int situation, int fuel);
 
     public void setFuel(int fuel) {
