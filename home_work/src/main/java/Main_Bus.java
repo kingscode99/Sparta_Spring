@@ -23,9 +23,7 @@ public class Main_Bus {
         fuel -= 50;
         bus1.setFuel(fuel);
         //상태변경
-        System.out.println("변경할 상태를 선택하시오\n1: 운행중\n2: 차고지행");
-        inPutData = scanner.nextLine();
-        bus1.situation(Integer.parseInt(inPutData), fuel);
+        bus1.situation(2, fuel);
         //주유량 +10
         fuel += 10;
         bus1.setFuel(fuel);
